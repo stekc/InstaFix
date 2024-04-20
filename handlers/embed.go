@@ -142,11 +142,11 @@ func Embed() fiber.Handler {
 			viewsData.OEmbedURL = c.BaseURL() + "/oembed?text=" + url.QueryEscape(viewsData.Description) + "&url=" + url.QueryEscape(viewsData.URL)
 		}
 
-		if direct {
-			return c.Redirect(sb.String())
-		}
+		//if direct {
+		return c.Redirect(sb.String())
+		//}
 
-		views.Embed(viewsData, viewsBuf)
-		return c.Send(viewsBuf.Bytes())
+		//views.Embed(viewsData, viewsBuf)
+		//return c.Send(viewsBuf.Bytes())
 	}
 }

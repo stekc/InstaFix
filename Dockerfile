@@ -38,4 +38,4 @@ COPY --from=alpine:latest /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 EXPOSE 3000
 
 # Run the app
-ENTRYPOINT ["/instafix"]
+ENTRYPOINT ["/app/instafix"]
