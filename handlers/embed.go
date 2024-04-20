@@ -52,9 +52,9 @@ func Embed() fiber.Handler {
 			}
 		}
 
-		direct, err := strconv.ParseBool(c.Query("direct", "false"))
+		embed, err := strconv.ParseBool(c.Query("embed", "false"))
 		if err != nil {
-			viewsData.Description = "Invalid direct parameter"
+			viewsData.Description = "Invalid embed parameter"
 			views.Embed(viewsData, viewsBuf)
 			return c.Send(viewsBuf.Bytes())
 		}
@@ -142,11 +142,11 @@ func Embed() fiber.Handler {
 			viewsData.OEmbedURL = c.BaseURL() + "/oembed?text=" + url.QueryEscape(viewsData.Description) + "&url=" + url.QueryEscape(viewsData.URL)
 		}
 
-		//if direct {
-		return c.Redirect(sb.String())
-		//}
+		if embed {
+			views.Embed(viewsData, viewsBuf)
+			return c.Send(viewsBuf.Bytes())
+		}
 
-		//views.Embed(viewsData, viewsBuf)
-		//return c.Send(viewsBuf.Bytes())
+		return c.Redirect(sb.String())
 	}
 }
